@@ -9,6 +9,35 @@ bandı (2.4–2.4835 GHz) uygulamaları için optimize edilmiştir.
 
 ---
 
+## 0. Tasarımın Görünümü
+
+![Anten yerleşimi — üstten görünüm, katman kesiti ve özet](./antenna_layout.png)
+
+> Görsel, makronun ürettiği geometriyle birebir aynı ölçülerdedir
+> (`draw_antenna.py` ile üretilir).
+
+### Anten nasıl çalışır?
+
+Mikroşerit yama, alt yüzeydeki kesintisiz toprak düzlemiyle birlikte bir
+**yarım dalga (λ/2) rezonatör** gibi davranır:
+
+- **Rezonans:** Yamanın `L` kenar uzunluğu 2.45 GHz'de rezonansı belirler.
+  Elektrik alan, yamanın iki açık (ışıyan) kenarı arasında durağan dalga
+  oluşturur.
+- **Işıma:** Enerji, yamanın açık kenarlarındaki **saçak (fringing)**
+  alanlarından serbest uzaya yayılır → yüzeye dik (broadside) yönlü ışıma.
+- **Empedans uyumu (inset besleme):** Yama kenarındaki giriş direnci
+  yüksektir (~200 Ω). Besleme hattını yamanın içine `y₀` kadar sokarak
+  (girinti/inset) bu direnç 50 Ω'a düşürülür:
+  ```
+  R_in(y₀) = R_in(0) · cos²(π·y₀ / L)
+  ```
+  Böylece 50 Ω mikroşerit hat ile mükemmel uyum (düşük S₁₁) sağlanır.
+- **Besleme:** 3.083 mm genişliğindeki mikroşerit hat tam 50 Ω karakteristik
+  empedans sunar ve dalga kılavuzu portuyla uyarılır.
+
+---
+
 ## 1. Tasarım Özeti
 
 | Özellik | Değer |
